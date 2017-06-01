@@ -13,12 +13,15 @@ void debugUpdate() {
       Serial.print(flange);
       Serial.print("\t");
       Serial.print(bitcrush);
-      Serial.print("\t");
-      Serial.print(ampli);
+      
       Serial.print("\t");
       Serial.print(dry);
       Serial.print("\t");
       Serial.print(freq);
+      Serial.print("\t");
+      */
+      
+      Serial.print(amp);
       Serial.print("\t");
       Serial.print("RMS = ");
       Serial.print(rms1.read());
@@ -26,7 +29,7 @@ void debugUpdate() {
       Serial.print(" PEAK = ");
       Serial.print(peak1.read());
       Serial.print('\t');
-    */
+    
     Serial.print(" Proc = ");
     Serial.print(AudioProcessorUsage());
     Serial.print(" (");
