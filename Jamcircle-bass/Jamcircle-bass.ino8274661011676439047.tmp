@@ -1,12 +1,5 @@
 //teensy 3.0 with pwm output
 
-//todo
-//wheel to speed to filter
-//latch to specific notes
-//glide between notes
-//handle up-> flanger, handle down -> bitcrusher
-//remove high pitched peep
-
 //amp at freq
 // 30  0.9
 // 70  0.7
@@ -38,12 +31,12 @@ AudioConnection          patchCord7(filter1, 0, pwm1, 0);
 Encoder myEnc(wheelpin1, wheelpin2);
 long oldPosition  = -999;
 
-float ampli = 1; 
+float ampli = 0.5; 
 
 void setup() {
   Serial.begin(9600);
   AudioMemory(10);
-  waveform1.begin(WAVEFORM_SQUARE);
+  waveform1.begin(WAVEFORM_SINE);
   waveform1.frequency(20);
   waveform1.amplitude(0.01);
   pinMode(stickXpin, INPUT);
@@ -54,7 +47,7 @@ void setup() {
   mixer1.gain(2, 0); //bitcrusher
 
   filter1.frequency(100);
-  filter1.resonance(5.0);
+  filter1.resonance(0.7);
 }
 
 void loop() {
@@ -68,7 +61,7 @@ void loop() {
   int freq = map(analogRead(stickXpin), 100, 1000, 20, 100);
   //float amp = fmap(analogRead(stickYpin), 100, 800, 1, 0) * fmap(freq, 30, 200, 0.9, 0.1);
   float amp = ampli * fmap(freq, 30, 200, 0.9, 0.1);
-  int filter = map(analogRead(stickYpin), 100, 1000, 20, 400);
+  int filter = map(analogRead(stickXpin), 100, 1000, 20, 200);
   Serial.print(filter);
   Serial.print("\t");
   Serial.print(freq);
