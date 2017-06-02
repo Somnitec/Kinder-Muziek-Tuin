@@ -17,9 +17,10 @@ void handleUpdate() {
 
   ampli = 1 - wobble - bitcrush;//to turn off the dry signal and avoid
 
-  mixer1.gain(1, wobble*4); //wobble
+  sine_fm1.frequency(freq*1.59);
+  mixer1.gain(1, wobble*2); //wobble
 
-  mixer1.gain(2, bitcrush / 2); //bitcrusher
+  mixer1.gain(2, 2*bitcrush); //bitcrusher
   //bitcrusher1.sampleRate(fmap(bitcrush, 0, 1, 44100, 1000));
 
   float dry = fmap(ampli, 0.2, 1, 0, 1) * fmap(freq, 30, 200, 0.9, 0.1);
