@@ -16,15 +16,15 @@ void debugUpdate() {
       Serial.print('\t');
       Serial.print(pinBaseline[i]);
       Serial.print('\t');
-      Serial.print(constrain(map(pinAverage[i]-touchThreshold, pinBaseline[i], pinBaseline[i] + touchRange, 0, maxval), 0, maxval));
+      Serial.print(constrain(map(pinAverage[i] - touchThreshold, pinBaseline[i], pinBaseline[i] + touchRange, 0, maxval), 0, maxval));
       Serial.print('\t');
     }
-    Serial.print(analogRead(fader1 ));
-    Serial.print('\t');
-    Serial.print(analogRead(fader2) );
-    Serial.print('\t');
-    Serial.print(analogRead(fader3 ));
-    Serial.print('\t');
+    for (int i = 0; i < 3; i++) {
+      Serial.print(analogRead(faderPin[i]));
+      Serial.print('\t');
+      Serial.print(faderPos[i]);
+      Serial.print('\t');
+    }
     Serial.print(digitalRead(mod1_0) );
     Serial.print('\t');
     Serial.print(digitalRead(mod1_1) );

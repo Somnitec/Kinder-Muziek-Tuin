@@ -11,9 +11,7 @@
 #define recalibrateButtonPin 22
 Bounce recalibrateButton = Bounce();
 int touchPin[] = {17, 18, 19};
-#define fader1 A0
-#define fader2 A1
-#define fader3 A2
+int faderPin[] = {A0, A1, A2};
 #define mod1_0 12
 #define mod1_1 11
 #define mod1_2 10
@@ -57,8 +55,11 @@ int pinBaseline[] = {0, 0, 0};
 elapsedMillis inputUpdateTimer;
 #define inputUpdateTime 30//in ms
 
-void setup() {
+int faderCalibration[] ={4000,3830,3700,2000};
+int faderPos[]={0,0,0};
 
+void setup() {
+  analogReadResolution(12);
   Serial.begin(9600);
   AudioMemory(10);
 
@@ -69,9 +70,9 @@ void setup() {
   pinMode(touchPin[0], INPUT);
   pinMode(touchPin[1], INPUT);
   pinMode(touchPin[2], INPUT);
-  pinMode(fader1, INPUT);
-  pinMode(fader2, INPUT);
-  pinMode(fader3, INPUT);
+  pinMode(faderPin[0], INPUT);
+  pinMode(faderPin[1], INPUT);
+  pinMode(faderPin[2], INPUT);
   pinMode(mod1_0, INPUT_PULLUP);
   pinMode(mod1_1, INPUT_PULLUP);
   pinMode(mod1_2, INPUT_PULLUP);
@@ -104,7 +105,7 @@ void setup() {
 
 void loop() {
   
-  inputUpdate()
+  inputUpdate();
   readTouchpads();
   audioStuff();
   debugUpdate();
