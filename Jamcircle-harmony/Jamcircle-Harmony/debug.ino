@@ -12,6 +12,9 @@ void debugUpdate() {
 
     boolean simple = true;
     if (simple == true) {
+        //Serial.print(newPosition);
+        Serial.print('\t');
+        Serial.print(digitalRead(calibratePin));
       //just raw values
       for (int i = 0; i < sensorAmount; i++) {
         Serial.print('\t');

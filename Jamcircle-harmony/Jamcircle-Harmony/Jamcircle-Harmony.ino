@@ -19,12 +19,25 @@ float tonesMaxAmplitude = 1.0 / sensorAmount + .03; //about one divided by the a
 #define autoCalibSoundRange 0.01 //how much the volume should stay the same for recalibration
 #define calibCycles 50 // it will average this amount of cycles when calibrating
 
+#include <Encoder.h>
+#define volumePin1 7
+#define volumePin2 20
+Encoder myEnc(7, 20);
+
+long oldPosition  = -999;
+//long newPosition = 0;
 
 void setup() {
   initializingStuff();
 }
 
 void loop() {
+  long newPosition = myEnc.read();
+  if (newPosition != oldPosition) {
+    oldPosition = newPosition;
+    Serial.println(newPosition);
+  }
+
   sensorStuff();
 
   calibrationUpdate();

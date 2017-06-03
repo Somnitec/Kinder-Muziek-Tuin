@@ -1,8 +1,9 @@
 #include <Audio.h>
-#include <Wire.h>
-#include <SPI.h>
-#include <SD.h>
-#include <SerialFlash.h>
+
+
+
+#define ledPin 13
+#define calibratePin 2
 
 int sensor[] = {23, 22, 19, 18, 17, 16, 15};
 int readings[11][numReadings];
@@ -23,8 +24,13 @@ void initializingStuff() {
   setFrequencies();
   turnOffAll();
 
-  pinMode(13, OUTPUT);
-  digitalWrite(13, HIGH);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, HIGH);
+
+  pinMode(volumePin1, INPUT_PULLUP);
+  pinMode(volumePin2, INPUT_PULLUP);
+
+  pinMode(calibratePin, INPUT_PULLUP);
 
   baselineCalibration();
 
