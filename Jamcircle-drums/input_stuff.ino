@@ -21,9 +21,6 @@ void inputUpdate() {
     if (volumeValue - volumeThreshold > lastVolume || volumeValue + volumeThreshold < lastVolume) {
       lastVolume = volumeValue;
       overalVolume = fmap(volumeValue, 0, 4096, 0, 1);
-      mixer1.gain(0, overalVolume*volumeMod1);
-      mixer1.gain(1, overalVolume*volumeMod2);
-      mixer1.gain(2, overalVolume*volumeMod3);
       Serial.println("VOLUMECHANGED");
     }
 

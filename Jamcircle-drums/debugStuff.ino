@@ -4,14 +4,14 @@ void debugUpdate() {
   if (debugUpdateTimer > debugUpdateTime) {
     debugUpdateTimer = 0;
 
-
+/*
     Serial.print(analogRead(volumepot));
     Serial.print('\t');
     Serial.print(overalVolume);
     Serial.print('\t');
     Serial.print(recalibrateButton.read());
     Serial.print('\t');
-
+*/
     int maxval = 1023;
     for (int i = 0; i < 3; i++) {
       Serial.print(pinAverage[i]);
@@ -21,6 +21,7 @@ void debugUpdate() {
       Serial.print(constrain(map(pinAverage[i] - touchThreshold, pinBaseline[i], pinBaseline[i] + touchRange, 0, maxval), 0, maxval));
       Serial.print('\t');
     }
+    /*
     for (int i = 0; i < 3; i++) {
       Serial.print(analogRead(faderPin[i]));
       Serial.print('\t');
@@ -58,6 +59,8 @@ void debugUpdate() {
     Serial.print(" (");
     Serial.print(AudioMemoryUsageMax());
     Serial.print(")");
+    */
+    
     Serial.println("");
   }
 }

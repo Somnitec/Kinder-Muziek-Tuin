@@ -1,7 +1,5 @@
 //todo
 //stabalize touch input and calibrate -> to tone on
-//tweaking the tones with the knobs
-//volume input with threshold
 
 #include <Audio.h>
 #include <Bounce2.h>
@@ -18,6 +16,8 @@ int faderPin[] = {A0, A1, A2};
 #define mod2 A7
 #define mod3_0 2
 #define mod3_1 3
+
+#define ledpin 13
 
 
 // GUItool: begin automatically generated code
@@ -46,9 +46,9 @@ elapsedMillis debugUpdateTimer;
 
 elapsedMillis touchUpdateTimer;
 #define touchUpdateTime 3//in ms
-#define touchAveraging 25//readings to average over
+#define touchAveraging 50//readings to average over
 #define touchRange 100//range
-#define touchThreshold 5//threshold value
+#define touchThreshold 50//threshold value
 #define baselineReadings 100//the amount of readings overwhich to take the average
 int bufferPos = 0;
 int pinBuffer[3][touchAveraging];
@@ -61,15 +61,15 @@ elapsedMillis inputUpdateTimer;
 int faderCalibration[] ={4000,3830,3700,2000};
 int faderPos[]={0,0,0};
 
-float volumeMod1= 0.2;
+float volumeMod1= 0.5;
 int mod1value[]={0,0,0,0};
 
-float volumeMod2= 1.0;
+float volumeMod2= 2.0;
 int mod2calibration[]={2400,900};
 int mod2range[]={40,80};
 int mod2value=0;
 
-float volumeMod3= 0.3;
+float volumeMod3= 0.6;
 int mod3value[]={0,0};
 
 #define volumeThreshold 100 // if the volume button is not not changed by more then this, don't change the volume
@@ -79,6 +79,8 @@ float overalVolume =0;
 
 
 void setup() {
+  pinMode(ledpin,OUTPUT);
+  digitalWrite(ledpin,HIGH);
   analogReadResolution(12);
   Serial.begin(9600);
   AudioMemory(10);
