@@ -3,9 +3,6 @@ void sensorStuff() {
   if (sensorUpdateTimer > sensorUpdateTime) {
     sensorUpdateTimer = 0;
 
-
-    int maxi[sensorAmount];
-    int mini[sensorAmount];
     int total[sensorAmount];
 
     totalAverage = 0;
@@ -36,7 +33,7 @@ void sensorStuff() {
 
       totalAverage += ampl[i];
 
-      theAmpl[i] = fmap(abs(immediateAverage[i]-average[i]),sensorThreshold,sensorMax,0,1);
+      theAmpl[i] = fmap(abs(immediateAverage[i]-average[i]),sensorThreshold,sensorMax+sensorThreshold,0,1);
     }
     totalAverage /= sensorAmount;
     readIndex = readIndex + 1;

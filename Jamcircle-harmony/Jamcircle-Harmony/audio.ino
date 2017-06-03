@@ -3,17 +3,17 @@
 
 
 int toneSet[7][2] = {
-  {NOTE_C3, NOTE_E3},
-  {NOTE_A3, NOTE_C3},
-  {NOTE_B3, NOTE_D3},
-  {NOTE_E3, NOTE_G3},
-  {NOTE_D3, NOTE_F3},
-  {NOTE_F3, NOTE_A3},
-  {NOTE_B3, NOTE_G3}
+  {NOTE_C4, NOTE_E4},
+  {NOTE_A4, NOTE_C4},
+  {NOTE_B4, NOTE_D4},
+  {NOTE_E4, NOTE_G4},
+  {NOTE_D4, NOTE_F4},
+  {NOTE_F4, NOTE_A4},
+  {NOTE_B4, NOTE_G4}
 };
 
 
-elapsedMicros audioUpdateTimer;
+elapsedMillis audioUpdateTimer;
 void audioUpdate() {
   if (audioUpdateTimer > audioUpdateTime) {
     audioUpdateTimer = 0;
@@ -40,21 +40,26 @@ void setFrequencies() {
 }
 
 void setAmplitudes() {
+  AudioNoInterrupts();
+  for (int i = 0; i < sensorAmount; i++) {
+    amplNow[i] = (amplNow[i] * glide + theAmpl[i] * 2) / (1 + glide);
+  }
 
-  sine1.amplitude(theAmpl[0]/14);
-  sine2.amplitude(theAmpl[0]/14);
-  sine3.amplitude(theAmpl[1]/14);
-  sine4.amplitude(theAmpl[1]/14);
-  sine5.amplitude(theAmpl[2]/14);
-  sine6.amplitude(theAmpl[2]/14);
-  sine7.amplitude(theAmpl[3]/14);
-  sine8.amplitude(theAmpl[3]/14);
-  sine9.amplitude(theAmpl[4]/14);
-  sine10.amplitude(theAmpl[4]/14);
-  sine11.amplitude(theAmpl[5]/14);
-  sine12.amplitude(theAmpl[5]/14);
-  sine13.amplitude(theAmpl[6]/14);
-  sine14.amplitude(theAmpl[6]/14);
+  sine1.amplitude(amplNow[0] / 14.);
+  sine2.amplitude(amplNow[0] / 14.);
+  sine3.amplitude(amplNow[1] / 14.);
+  sine4.amplitude(amplNow[1] / 14.);
+  sine5.amplitude(amplNow[2] / 14.);
+  sine6.amplitude(amplNow[2] / 14.);
+  sine7.amplitude(amplNow[3] / 14.);
+  sine8.amplitude(amplNow[3] / 14);
+  sine9.amplitude(amplNow[4] / 14.);
+  sine10.amplitude(amplNow[4] / 14.);
+  sine11.amplitude(amplNow[5] / 14.);
+  sine12.amplitude(amplNow[5] / 14.);
+  sine13.amplitude(amplNow[6] / 14.);
+  sine14.amplitude(amplNow[6] / 14.);
+  AudioInterrupts();
 }
 
 void turnOffAll() {

@@ -53,7 +53,7 @@ AudioConnection          patchCord21(mixer1, pwm1);
 #define sensorAmount 7
 
 #define sensorThreshold 10
-#define sensorMax 50
+#define sensorMax 10
 
 #define ledPin 13
 #define calibratePin 2
@@ -72,6 +72,8 @@ float ampl[sensorAmount];
 float totalAverage;
 
 float theAmpl[sensorAmount];
+float amplNow[sensorAmount];
+float glide = 10;
 
 int readIndex = 0;
 
@@ -83,7 +85,7 @@ Encoder volumePot(volumePin1, volumePin2);
 float tonesMaxAmplitude = 1.0 / sensorAmount + .03; //about one divided by the amount of tones available (.11 is the safest value)
 
 #define debugUpdateTime 10//in ms
-#define audioUpdateTime 100//in us
+#define audioUpdateTime 10//in us
 #define calibrationUpdateTime 5//in ms
 
 #define sensorUpdateTime 100//in us

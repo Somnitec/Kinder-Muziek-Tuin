@@ -2,6 +2,10 @@
 
 void initializingStuff() {
 
+  for (int i = 0; i < sensorAmount; i++) {
+    amplNow[i] = 0;
+  }
+
   Serial.begin(115200);
 
   AudioMemory(12);//increase if the are glitches
@@ -15,7 +19,7 @@ void initializingStuff() {
 
   baselineCalibration();
 
-  volumePot.write(10);
+  volumePot.write(30);
 
 }
 
