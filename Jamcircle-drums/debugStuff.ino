@@ -7,6 +7,8 @@ void debugUpdate() {
 
     Serial.print(analogRead(volumepot));
     Serial.print('\t');
+    Serial.print(overalVolume);
+    Serial.print('\t');
     Serial.print(recalibrateButton.read());
     Serial.print('\t');
 
@@ -41,10 +43,10 @@ void debugUpdate() {
 
     Serial.print("\t");
     Serial.print("RMS = ");
-    //Serial.print(rms1.read());
+    Serial.print(rms1.read());
     Serial.print('\t');
     Serial.print(" PEAK = ");
-    //Serial.print(peak1.read());
+    Serial.print(peak1.read());
     Serial.print('\t');
 
     Serial.print(" Proc = ");

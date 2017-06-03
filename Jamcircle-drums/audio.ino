@@ -30,17 +30,27 @@ int rythms[3][5][16] = {
 };
 
 void audioStuff() {
-  if (audioUpdateTimer > 60000 / BPM /4) {
+  if (audioUpdateTimer > 60000 / BPM / 4) {
     audioUpdateTimer = 0;
 
 
     for (int i = 0; i < 3; i++) {
-      mixer1.gain(i, fmap(pinAverage[i] - touchThreshold, pinBaseline[i], pinBaseline[i] + touchRange, 0, 1));
+      //mixer1.gain(i, fmap(pinAverage[i] - touchThreshold, pinBaseline[i], pinBaseline[i] + touchRange, 0, 1));
     }
+    /*
+        mixer1.gain(0, 0.1);
+        mixer1.gain(1, 0.1);
+        mixer1.gain(2, 0.1);
+    */
+    drum1.frequency(600 + mod1value[0] * 200 + mod1value[1] * 600 + mod1value[2] * 1000 + mod1value[3] * 1400);
+    drum1.length(100 + mod1value[0] * 80 + mod1value[1] * 60 + mod1value[2] * 40 + mod1value[3] * 20);
 
-    mixer1.gain(0, 0.1);
-    mixer1.gain(1, 0.1);
-    mixer1.gain(2, 0.1);
+    drum2.frequency(mod2value);
+
+
+    drum3.frequency(550 + 275 * mod3value[0]);
+    drum3.pitchMod(0.5 + 0.02 * mod3value[1]);
+
     if (sequence(0))drum1.noteOn();
     if (sequence(1))drum2.noteOn();
     if (sequence(2))drum3.noteOn();
@@ -51,9 +61,9 @@ void audioStuff() {
 
 boolean sequence(int drum) {
   boolean state = false;
-  int value = rythms[drum][faderPos[drum]][beat%steps];
-  if (value> 0){
-    if(random(value)==0)state = true;
+  int value = rythms[drum][faderPos[drum]][beat % steps];
+  if (value > 0) {
+    if (random(value) == 0)state = true;
   }
   return state;
 }

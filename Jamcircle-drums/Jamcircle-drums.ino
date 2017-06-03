@@ -1,6 +1,5 @@
 //todo
 //stabalize touch input and calibrate -> to tone on
-//rhythm tables with one_in()
 //tweaking the tones with the knobs
 //volume input with threshold
 
@@ -26,11 +25,15 @@ AudioSynthSimpleDrum     drum1;          //xy=943,456
 AudioSynthSimpleDrum     drum3;          //xy=945,546
 AudioSynthSimpleDrum     drum2;          //xy=946,502
 AudioMixer4              mixer1;         //xy=1102,505
-AudioOutputAnalog        dac1;           //xy=1259,528
+AudioOutputAnalog        dac1;           //xy=1232,506
+AudioAnalyzePeak         peak1;          //xy=1259,420
+AudioAnalyzeRMS          rms1;           //xy=1281,457
 AudioConnection          patchCord1(drum1, 0, mixer1, 0);
 AudioConnection          patchCord2(drum3, 0, mixer1, 2);
 AudioConnection          patchCord3(drum2, 0, mixer1, 1);
 AudioConnection          patchCord4(mixer1, dac1);
+AudioConnection          patchCord5(mixer1, rms1);
+AudioConnection          patchCord6(mixer1, peak1);
 // GUItool: end automatically generated code
 
 elapsedMillis audioUpdateTimer;
@@ -57,6 +60,23 @@ elapsedMillis inputUpdateTimer;
 
 int faderCalibration[] ={4000,3830,3700,2000};
 int faderPos[]={0,0,0};
+
+float volumeMod1= 0.2;
+int mod1value[]={0,0,0,0};
+
+float volumeMod2= 1.0;
+int mod2calibration[]={2400,900};
+int mod2range[]={40,80};
+int mod2value=0;
+
+float volumeMod3= 0.3;
+int mod3value[]={0,0};
+
+#define volumeThreshold 100 // if the volume button is not not changed by more then this, don't change the volume
+int lastVolume=0;
+float overalVolume =0;
+
+
 
 void setup() {
   analogReadResolution(12);
