@@ -33,7 +33,7 @@ void sensorStuff() {
 
       totalAverage += ampl[i];
 
-      theAmpl[i] = fmap(abs(immediateAverage[i]-average[i]),sensorThreshold,sensorMax+sensorThreshold,0,1);
+      //theAmpl[i] = fmap(abs(immediateAverage[i]-average[i]),sensorThreshold,sensorMax+sensorThreshold,0,1);
     }
     totalAverage /= sensorAmount;
     readIndex = readIndex + 1;

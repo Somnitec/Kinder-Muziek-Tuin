@@ -19,28 +19,26 @@ void debugUpdate() {
       Serial.print('\t');
       Serial.print(average[i]);
       Serial.print('\t');
-      Serial.print(immediateAverage[i]);
-      Serial.print('\t');
-      Serial.print(abs(immediateAverage[i]-average[i]));
+      Serial.print(ampl[i]);
     }
-    
- 
-      Serial.print("RMS = ");
-      Serial.print(rms1.read());
-      Serial.print('\t');
-      Serial.print(" PEAK = ");
-      Serial.print(peak1.read());
-      Serial.print('\t');
-      Serial.print(" Proc = ");
-      Serial.print(AudioProcessorUsage());
-      Serial.print(" (");
-      Serial.print(AudioProcessorUsageMax());
-      Serial.print("),  Mem = ");
-      Serial.print(AudioMemoryUsage());
-      Serial.print(" (");
-      Serial.print(AudioMemoryUsageMax());
-      Serial.print(")");
-    
+
+    Serial.print('\t');
+    Serial.print("RMS = ");
+    Serial.print(rms1.read());
+    Serial.print('\t');
+    Serial.print(" PEAK = ");
+    Serial.print(peak1.read());
+    Serial.print('\t');
+    Serial.print(" Proc = ");
+    Serial.print(AudioProcessorUsage());
+    Serial.print(" (");
+    Serial.print(AudioProcessorUsageMax());
+    Serial.print("),  Mem = ");
+    Serial.print(AudioMemoryUsage());
+    Serial.print(" (");
+    Serial.print(AudioMemoryUsageMax());
+    Serial.print(")");
+
     Serial.println();
   }
 

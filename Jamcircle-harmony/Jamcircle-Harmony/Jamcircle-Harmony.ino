@@ -58,10 +58,10 @@ AudioConnection          patchCord21(mixer1, pwm1);
 #define ledPin 13
 #define calibratePin 2
 
-#define numReadings 350
+#define numReadings 100
 #define numReadingsImmediate 100
 
-int sensor[] = { 18, 17, 16, 15, 23, 22, 19};
+int sensor[] = {18, 19, 22, 23, 15, 16, 17};
 int readings[sensorAmount][numReadings];
 int lowCal[sensorAmount];
 int highCal[sensorAmount];

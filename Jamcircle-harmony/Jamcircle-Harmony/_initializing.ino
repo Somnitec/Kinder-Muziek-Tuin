@@ -19,7 +19,7 @@ void initializingStuff() {
 
   baselineCalibration();
 
-  volumePot.write(30);
+  volumePot.write(80);
 
 }
 
