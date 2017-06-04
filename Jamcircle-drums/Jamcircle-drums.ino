@@ -58,29 +58,29 @@ int pinBaseline[] = {0, 0, 0};
 elapsedMillis inputUpdateTimer;
 #define inputUpdateTime 30//in ms
 
-int faderCalibration[] ={4000,3830,3700,2000};
-int faderPos[]={0,0,0};
+int faderCalibration[] = {4000, 3830, 3700, 2000};
+int faderPos[] = {0, 0, 0};
 
-float volumeMod1= 0.5;
-int mod1value[]={0,0,0,0};
+float volumeMod1 = 0.5;
+int mod1value[] = {0, 0, 0, 0};
 
-float volumeMod2= 2.0;
-int mod2calibration[]={2400,900};
-int mod2range[]={40,80};
-int mod2value=0;
+float volumeMod2 = 1.0;
+int mod2calibration[] = {2400, 900};
+int mod2range[] = {200, 1500};
+int mod2value = 0;
 
-float volumeMod3= 0.6;
-int mod3value[]={0,0};
+float volumeMod3 = 0.7;
+int mod3value[] = {0, 0};
 
 #define volumeThreshold 100 // if the volume button is not not changed by more then this, don't change the volume
-int lastVolume=0;
-float overalVolume =0;
+int lastVolume = 0;
+float overalVolume = 0;
 
 
 
 void setup() {
-  pinMode(ledpin,OUTPUT);
-  digitalWrite(ledpin,HIGH);
+  pinMode(ledpin, OUTPUT);
+  digitalWrite(ledpin, HIGH);
   analogReadResolution(12);
   Serial.begin(9600);
   AudioMemory(10);
@@ -126,7 +126,7 @@ void setup() {
 }
 
 void loop() {
-  
+
   inputUpdate();
   readTouchpads();
   audioStuff();

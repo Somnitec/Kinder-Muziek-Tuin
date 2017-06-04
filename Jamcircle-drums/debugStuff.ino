@@ -41,7 +41,7 @@ void debugUpdate() {
     Serial.print(digitalRead(mod3_0) );
     Serial.print('\t');
     Serial.print(digitalRead(mod3_1) );
-
+*/
     Serial.print("\t");
     Serial.print("RMS = ");
     Serial.print(rms1.read());
@@ -59,7 +59,7 @@ void debugUpdate() {
     Serial.print(" (");
     Serial.print(AudioMemoryUsageMax());
     Serial.print(")");
-    */
+    
     
     Serial.println("");
   }
