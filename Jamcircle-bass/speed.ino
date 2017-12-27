@@ -4,7 +4,7 @@ boolean directio = false;
 void speedUpdate() {
   if (speedTimer > speedUpdateTime) {
     speedTimer = 0;
-    speedVal = lastVal - newPosition;
+    speedVal =   lastVal -newPosition ;
     lastVal = newPosition;
 
     if (speedVal < 0) {
@@ -14,7 +14,7 @@ void speedUpdate() {
           waveform2.begin(WAVEFORM_SQUARE);
           waveform3.begin(WAVEFORM_SQUARE);
         */
-        speedmod = 1+speedmodifier;
+        speedmod = 1 + speedmodifier;
       }
       directio = true;
     } else if (speedVal > 0) {
@@ -24,12 +24,12 @@ void speedUpdate() {
           waveform2.begin(WAVEFORM_SAWTOOTH);
           waveform3.begin(WAVEFORM_SAWTOOTH);
         */
-        speedmod = 1-speedmodifier;
+        speedmod = 1 - speedmodifier;
       }
       directio = false;
     }
 
-
+    speedVal = constrain(speedVal*2, -20, 0);
     int filter = fmap(abs(speedVal), 0, 200, 100, 6000);
     filter1.frequency(filter);
     amp = fmap(abs(speedVal), 0, 200, 0.00, ampli);

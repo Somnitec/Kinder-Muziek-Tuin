@@ -4,6 +4,10 @@ void debugUpdate() {
   if (debugUpdateTimer > debugUpdateTime) {
     debugUpdateTimer = 0;
 
+    Serial.print(newPosition);
+    Serial.print("\t");
+
+
     Serial.print(analogRead(volumepot));
     Serial.print("\t");
     Serial.print(speedVal);

@@ -1,3 +1,4 @@
+
 //teensy 3.0 with pwm output
 
 //todo
@@ -15,14 +16,13 @@
 
 #define stickXpin A5
 #define stickYpin A4
-#define wheelpin1 14
-#define wheelpin2 15
+#define wheelpin1 15//interrupt
+#define wheelpin2 14//vcc
 
 
 #define ledpin 13
 
 #include <Audio.h>
-#include <Encoder.h>
 
 // GUItool: begin automatically generated code
 AudioSynthWaveform       waveform1;      //xy=614,334
@@ -43,7 +43,6 @@ AudioConnection          patchCord7(filter1, 0, peak1, 0);
 // GUItool: end automatically generated code
 float amp = 0;
 
-Encoder myEnc(wheelpin1, wheelpin2);
 long oldPosition  = -999;
 int speedVal = 0;
 long newPosition = 0;
@@ -53,7 +52,7 @@ float ampli = 2; // general amplitude modifier
 int handleMiddlePoint = 4096 / 2;
 
 elapsedMillis speedTimer;
-#define speedUpdateTime 10
+#define speedUpdateTime 60
 
 elapsedMillis handleTimer;
 #define handleUpdateTime 30
@@ -67,13 +66,19 @@ float stickup = 0;
 float stickdown = 0;
 
 #define speedmodifier 0.01
-float speedmod=0;
+float speedmod = 0;
 
 #define volumeThreshold 100 // if the volume button is not not changed by more then this, don't change the volume
-int lastVolume=0;
-float overalVolume =0;
+int lastVolume = 0;
+float overalVolume = 0;
 
 void setup() {
+  pinMode(wheelpin2, OUTPUT);
+  digitalWrite(wheelpin2, HIGH);
+  pinMode(wheelpin1, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(wheelpin1), count, RISING);
+
+
   pinMode(ledpin, OUTPUT);
   digitalWrite(ledpin, HIGH);
 
@@ -108,7 +113,6 @@ void setup() {
 void loop() {
   speedUpdate();
   handleUpdate();
-  encoderUpdate();
   debugUpdate();
 }
 
@@ -118,12 +122,6 @@ float fmap(float x, float in_min, float in_max, float out_min, float out_max)
   return constrain(val, min(out_min, out_max), max(out_min, out_max));
 }
 
-void encoderUpdate() {
-  newPosition = myEnc.read();
-  if (newPosition != oldPosition) {
-    oldPosition = newPosition;
-    //Serial.println(newPosition);
-  }
+void count() {
+  newPosition++;
 }
-
-
