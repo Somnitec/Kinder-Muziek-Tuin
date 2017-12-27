@@ -3,7 +3,7 @@
 long newPosition = 0;
 
 void setup() {
-  pinMode(wheelpin2, OUTPUT);
+  pinMode(wheelp in2, OUTPUT);
   digitalWrite(wheelpin2, HIGH);
   pinMode(wheelpin1, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(wheelpin1), count, RISING);

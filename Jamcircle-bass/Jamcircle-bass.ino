@@ -44,7 +44,8 @@ AudioConnection          patchCord7(filter1, 0, peak1, 0);
 float amp = 0;
 
 long oldPosition  = -999;
-int speedVal = 0;
+float speedVal = 0;
+int realSpeed = 0;
 long newPosition = 0;
 
 //settings

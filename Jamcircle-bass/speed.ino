@@ -4,8 +4,12 @@ boolean directio = false;
 void speedUpdate() {
   if (speedTimer > speedUpdateTime) {
     speedTimer = 0;
-    speedVal =   lastVal -newPosition ;
+    realSpeed = lastVal - newPosition ;
+    realSpeed*=5;
     lastVal = newPosition;
+    float glide = 1.5;
+    speedVal = (speedVal * glide + realSpeed * 1) / (1 + glide);
+
 
     if (speedVal < 0) {
       if (directio == false) {
@@ -29,7 +33,7 @@ void speedUpdate() {
       directio = false;
     }
 
-    speedVal = constrain(speedVal*2, -20, 0);
+    speedVal = constrain(speedVal, -20, 0);
     int filter = fmap(abs(speedVal), 0, 200, 100, 6000);
     filter1.frequency(filter);
     amp = fmap(abs(speedVal), 0, 200, 0.00, ampli);
