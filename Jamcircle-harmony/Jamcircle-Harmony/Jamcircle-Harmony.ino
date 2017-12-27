@@ -25,7 +25,7 @@ AudioMixer4              mixer5;         //xy=876,647
 AudioMixer4              mixer4;         //xy=885,518
 AudioMixer4              mixer1;         //xy=1104,345
 AudioAnalyzePeak         peak1;          //xy=1261,306
-AudioOutputPWM           pwm1;           //xy=1263,375
+AudioOutputAnalog           pwm1;           //xy=1263,375
 AudioAnalyzeRMS          rms1;           //xy=1264,339
 AudioConnection          patchCord1(sine5, 0, mixer3, 0);
 AudioConnection          patchCord2(sine1, 0, mixer2, 0);
